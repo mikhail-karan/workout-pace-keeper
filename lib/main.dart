@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(
@@ -14,6 +14,9 @@ void main() {
   );
 }
 
+int paceNum = 5;
+bool isStart = true;
+
 class AwesomeButton extends StatefulWidget {
   @override
   AwesomeButtonState createState() => new AwesomeButtonState();
@@ -21,8 +24,43 @@ class AwesomeButton extends StatefulWidget {
 
 class AwesomeButtonState extends State<AwesomeButton> {
 
+  
+
+  //int prettyNum = paceNum ~/ 1000;
+  Timer timer;
+  String button = "START";
+  var buttonColor = Colors.lightBlue;
+
+  void startInterval() {
+    const interval = const Duration(seconds: 1);
+    var duration = interval*paceNum;
+    timer = new Timer.periodic(duration, (Timer timer) => intervalCallback(interval));
+
+  }
+
+  void intervalCallback(var interval) {
+    if (isStart){
+    }
+    else {
+      timer.cancel();
+      
+    }
+  }
+
   void onPressed() {
     setState(() {
+      if (isStart){
+        button = "STOP";
+        buttonColor = Colors.red;
+        isStart = false;
+      }
+      else {
+        button = "START";
+        buttonColor = Colors.lightBlue;
+        isStart = true;
+        
+      }
+      
     });
   }
 
@@ -35,7 +73,7 @@ class AwesomeButtonState extends State<AwesomeButton> {
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text("Select your place below", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
+              new Text("Select your pace below", style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
               new Container(
                 margin: new EdgeInsets.all(40.0),
                 height: 200.0,
@@ -47,11 +85,12 @@ class AwesomeButtonState extends State<AwesomeButton> {
                     width: 2.0
                   )
                 ),
-                child: new Center (child: new Text("5 Seconds", style: new TextStyle(fontSize: 20.0)))
+                child: new Center (child: new Text(":" + paceNum.toString(), style: new TextStyle(fontSize: 65.0)))
               ),
               new RaisedButton(
-                child: new Text("START", style: new TextStyle(fontSize: 25.0, color: Colors.white)),
-                color: Colors.lightBlue,
+                padding: new EdgeInsets.all(20.0),
+                child: new Text(button, style: new TextStyle(fontSize: 25.0, color: Colors.white)),
+                color: buttonColor,
                 onPressed: onPressed,
               )
             ]
