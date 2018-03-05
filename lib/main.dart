@@ -8,12 +8,57 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     new MaterialApp(
-      title: 'Interval Buzzer',
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Interval Buzzer'),
-        ),
-      ),
+      title: 'Workout Pace Keeper',
+      home: new AwesomeButton()
     ),
   );
+}
+
+class AwesomeButton extends StatefulWidget {
+  @override
+  AwesomeButtonState createState() => new AwesomeButtonState();
+}
+
+class AwesomeButtonState extends State<AwesomeButton> {
+
+  void onPressed() {
+    setState(() {
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(title: new Text('Workout Pace Keeper')),
+      body: new Container(
+        child: new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text("Select your place below", style: new TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold)),
+              new Container(
+                margin: new EdgeInsets.all(40.0),
+                height: 200.0,
+                width: 200.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: new Border.all(
+                    color: Colors.lightBlue,
+                    width: 2.0
+                  )
+                ),
+                child: new Center (child: new Text("5 Seconds", style: new TextStyle(fontSize: 20.0)))
+              ),
+              new RaisedButton(
+                child: new Text("START", style: new TextStyle(fontSize: 25.0, color: Colors.white)),
+                color: Colors.lightBlue,
+                onPressed: onPressed,
+              )
+            ]
+          )
+        )
+      )
+    );
+
+  }
 }
