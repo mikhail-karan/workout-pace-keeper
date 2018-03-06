@@ -17,7 +17,7 @@ void main() {
 }
 
 var paceNum = 5;
-var timerNum = 1;
+var timerNum = 20;
 bool isStart = true;
 
 final Iterable<Duration> pauses = [
@@ -33,9 +33,6 @@ class AwesomeButton extends StatefulWidget {
 
 class AwesomeButtonState extends State<AwesomeButton> {
 
-  
-
-  int prettyNum = paceNum ~/ 1000;
   Timer timer;
   String button = "START";
   var buttonColor = Colors.lightBlue;
@@ -106,7 +103,6 @@ class AwesomeButtonState extends State<AwesomeButton> {
                   children: <Widget>[new Text("Set your interval and pace below", style: new TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic))]
               ),
               ),
-              //new Text("Select your pace below", style: new TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -116,16 +112,6 @@ class AwesomeButtonState extends State<AwesomeButton> {
               ),
               new Container(
                 margin: new EdgeInsets.only(bottom: 40.0),
-                // height: 200.0,
-                // width: 200.0,
-                // decoration: new BoxDecoration(
-                //   shape: BoxShape.circle,
-                //   border: new Border.all(
-                //     color: Colors.lightBlue,
-                //     width: 2.0
-                //   )
-                // ),
-                //child: new Center (child: new Text(":" + paceNum.toString(), style: new TextStyle(fontSize: 65.0)))
                 child: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[new NumberPicker.integer(
