@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:vibrate/vibrate.dart';
 
 void main() {
   runApp(
@@ -14,7 +15,8 @@ void main() {
   );
 }
 
-int paceNum = 5;
+var paceNum = 5;
+var timerNum = 100;
 bool isStart = true;
 
 class AwesomeButton extends StatefulWidget {
@@ -26,23 +28,24 @@ class AwesomeButtonState extends State<AwesomeButton> {
 
   
 
-  //int prettyNum = paceNum ~/ 1000;
+  int prettyNum = paceNum ~/ 1000;
   Timer timer;
   String button = "START";
   var buttonColor = Colors.lightBlue;
 
   void startInterval() {
-    const interval = const Duration(seconds: 1);
+    const interval = const Duration(milliseconds: 1000);
     var duration = interval*paceNum;
-    timer = new Timer.periodic(duration, (Timer timer) => intervalCallback(interval));
+    timer = new Timer.periodic(duration, (Timer t) => intervalCallback(duration));
 
   }
 
   void intervalCallback(var interval) {
     if (isStart){
+      timer.cancel();
     }
     else {
-      timer.cancel();
+      Vibrate.vibrate();
       
     }
   }
@@ -53,11 +56,13 @@ class AwesomeButtonState extends State<AwesomeButton> {
         button = "STOP";
         buttonColor = Colors.red;
         isStart = false;
+        startInterval();
       }
       else {
         button = "START";
         buttonColor = Colors.lightBlue;
         isStart = true;
+        
         
       }
       
