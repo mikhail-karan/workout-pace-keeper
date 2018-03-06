@@ -59,6 +59,7 @@ dev_dependencies:
   web_socket_channel: 1.0.7 # TRANSITIVE DEPENDENCY
   yaml: 2.1.13 # TRANSITIVE DEPENDENCY
   vibrate: "^0.0.2"
+  numberpicker: "^0.1.0"
 
 flutter:
   uses-material-design: true
