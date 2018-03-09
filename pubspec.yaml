@@ -60,6 +60,10 @@ dev_dependencies:
   yaml: 2.1.13 # TRANSITIVE DEPENDENCY
   vibrate: "^0.0.2"
   numberpicker: "^0.1.0"
+  audioplayer: "^0.3.0"
+  path_provider: "^0.3.1"
 
 flutter:
   uses-material-design: true
+  assets: 
+    - assets/sounds/light.mp3

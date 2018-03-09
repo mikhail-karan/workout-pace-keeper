@@ -6,23 +6,26 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:vibrate/vibrate.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:flutter/services.dart';
+
+import 'sound.dart';
 
 void main() {
   runApp(
     new MaterialApp(
-      title: 'Workout Pace Keeper',
+      title: 'Tempo Buddy',
       home: new AwesomeButton()
     ),
   );
 }
 
-var paceNum = 5;
+int paceNum = 5;
 var timerNum = 20;
 bool isStart = true;
 
 final Iterable<Duration> pauses = [
     const Duration(milliseconds: 500),
-    const Duration(milliseconds: 1000),
+    const Duration(milliseconds: 500),
     const Duration(milliseconds: 500),
 ];
 
@@ -38,21 +41,30 @@ class AwesomeButtonState extends State<AwesomeButton> {
   var buttonColor = Colors.lightBlue;
   int intervalCount = 1;
 
+  @override
+  void initState() {
+    loadFile();
+    super.initState();
+  }
   
 
   void startInterval() {
     const interval = const Duration(milliseconds: 1000);
     var duration = interval*paceNum;
-    timer = new Timer.periodic(duration, (Timer t) => intervalCallback(duration));
+    timer = new Timer(duration, () => intervalCallback(duration));
 
   }
 
-  void intervalCallback(var interval) {
+  void intervalCallback(var duration) {
     if (isStart){
       timer.cancel();
     }
     else if (intervalCount < timerNum){
-      Vibrate.vibrate();
+      //Vibrate.vibrate();
+      //SystemSound.play(SystemSoundType.click);
+      playLocal();
+      timer.cancel();
+      timer = new Timer(duration, () => intervalCallback(duration));
       intervalCount++;
     }
     else {
@@ -78,6 +90,7 @@ class AwesomeButtonState extends State<AwesomeButton> {
       }
       else {
         button = "START";
+        intervalCount = 1;
         buttonColor = Colors.lightBlue;
         isStart = true;
         
